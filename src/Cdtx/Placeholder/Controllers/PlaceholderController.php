@@ -8,7 +8,11 @@ class PlaceholderController extends Controller {
 	
 	public function generate($width,$height,$color=null)
 	{
+		// Validate Color
 		if ($color == null or ! $this->isColor($color) ) $color = Config::get('placeholder::placeholder.color');
+
+		// Validate Size
+		if (! $this->checkSize($width) or ! $this->checkSize($height)) App::abort('404');
 
 		$placeholder = new Placeholder();
 
@@ -32,5 +36,13 @@ class PlaceholderController extends Controller {
 		      return true;
 		} 
 		else return false;
+	}
+
+	protected function checkSize($value)
+	{
+		if ( (int) $value > 0)
+		{
+			return true;
+		}
 	}
 }
