@@ -1,5 +1,5 @@
 <?php namespace Cdtx\Placeholder\Controllers;
-use Controller,Response, Config;
+use Controller,Response, Config, App;
 use Cdtx\Placeholder\Placeholder;
 
 
@@ -27,6 +27,10 @@ class PlaceholderController extends Controller {
 	// Validate Color
 	protected function isColor($color)
 	{
-		return true;
+		if(preg_match('/^[a-f0-9]{6}$/i', $color)) //hex color is valid
+		{
+		      return true;
+		} 
+		else return false;
 	}
 }
